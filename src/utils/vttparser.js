@@ -169,8 +169,8 @@ function parseCue (input, cue, regionList) {
         settings.alt(k, v, ['rl', 'lr']);
         break;
       case 'line':
-        var vals = v.split(','),
-          vals0 = vals[0];
+        var vals = v.split(',');
+          var vals0 = vals[0];
         settings.integer(k, vals0);
         if (settings.percent(k, vals0)) {
           settings.set('snapToLines', false);

@@ -271,7 +271,7 @@ export default class LevelController extends EventHandler {
       return;
     }
 
-    let levelError = false, fragmentError = false;
+    let levelError = false; let fragmentError = false;
     let levelIndex;
 
     // try to recover not fatal errors
@@ -313,7 +313,7 @@ export default class LevelController extends EventHandler {
     let { config } = this.hls;
     let { details: errorDetails } = errorEvent;
     let level = this._levels[levelIndex];
-    let redundantLevels, delay, nextLevel;
+    let redundantLevels; let delay; let nextLevel;
 
     level.loadError++;
     level.fragmentError = fragmentError;

@@ -38,11 +38,11 @@ class FPSController extends EventHandler {
     let currentTime = performance.now();
     if (decodedFrames) {
       if (this.lastTime) {
-        let currentPeriod = currentTime - this.lastTime,
-          currentDropped = droppedFrames - this.lastDroppedFrames,
-          currentDecoded = decodedFrames - this.lastDecodedFrames,
-          droppedFPS = 1000 * currentDropped / currentPeriod,
-          hls = this.hls;
+        let currentPeriod = currentTime - this.lastTime;
+          let currentDropped = droppedFrames - this.lastDroppedFrames;
+          let currentDecoded = decodedFrames - this.lastDecodedFrames;
+          let droppedFPS = 1000 * currentDropped / currentPeriod;
+          let hls = this.hls;
         hls.trigger(Event.FPS_DROP, { currentDropped: currentDropped, currentDecoded: currentDecoded, totalDroppedFrames: droppedFrames });
         if (droppedFPS > 0) {
           // logger.log('checkFPS : droppedFPS/decodedFPS:' + droppedFPS/(1000 * currentDecoded / currentPeriod));

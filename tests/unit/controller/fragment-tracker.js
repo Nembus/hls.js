@@ -39,7 +39,7 @@ function loadFragmentAndBuffered (hls, fragment) {
 }
 describe('FragmentTracker', function () {
   describe('getPartialFragment', function () {
-    let hls, fragmentTracker, fragment, buffered, partialFragment, timeRanges;
+    let hls; let fragmentTracker; let fragment; let buffered; let partialFragment; let timeRanges;
 
     hls = new Hls({});
     fragmentTracker = new FragmentTracker(hls);
@@ -84,7 +84,7 @@ describe('FragmentTracker', function () {
   });
 
   describe('getState', function () {
-    let hls, fragmentTracker, fragment, buffered, timeRanges;
+    let hls; let fragmentTracker; let fragment; let buffered; let timeRanges;
 
     hls = new Hls({});
     fragmentTracker = new FragmentTracker(hls);
@@ -287,7 +287,7 @@ describe('FragmentTracker', function () {
   });
 
   describe('onFragBuffered', function () {
-    let hls, fragmentTracker, fragment, timeRanges;
+    let hls; let fragmentTracker; let fragment; let timeRanges;
 
     hls = new Hls({});
     fragmentTracker = new FragmentTracker(hls);

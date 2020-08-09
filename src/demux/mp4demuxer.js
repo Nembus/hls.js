@@ -102,8 +102,8 @@ class MP4Demuxer {
 
   // Find the data for a box specified by its path
   static findBox (data, path) {
-    let results = [],
-      i, size, type, end, subresults, start, endbox;
+    let results = [];
+      let i; let size; let type; let end; let subresults; let start; let endbox;
 
     if (data.data) {
       start = data.start;
@@ -308,7 +308,7 @@ class MP4Demuxer {
  * fragment, in seconds
  */
   static getStartDTS (initData, fragment) {
-    let trafs, baseTimes, result;
+    let trafs; let baseTimes; let result;
 
     // we need info from two childrend of each track fragment box
     trafs = MP4Demuxer.findBox(fragment, ['moof', 'traf']);
@@ -316,7 +316,7 @@ class MP4Demuxer {
     // determine the start times for each track
     baseTimes = [].concat.apply([], trafs.map(function (traf) {
       return MP4Demuxer.findBox(traf, ['tfhd']).map(function (tfhd) {
-        let id, scale, baseTime;
+        let id; let scale; let baseTime;
 
         // get the track id from the tfhd
         id = MP4Demuxer.readUint32(tfhd, 4);
@@ -325,7 +325,7 @@ class MP4Demuxer {
 
         // get the base media decode time from the tfdt
         baseTime = MP4Demuxer.findBox(traf, ['tfdt']).map(function (tfdt) {
-          let version, result;
+          let version; let result;
 
           version = tfdt.data[tfdt.start];
           result = MP4Demuxer.readUint32(tfdt, 4);
@@ -382,7 +382,7 @@ class MP4Demuxer {
       this.resetInitSegment(data, this.audioCodec, this.videoCodec, false);
       initData = this.initData;
     }
-    let startDTS, initPTS = this.initPTS;
+    let startDTS; let initPTS = this.initPTS;
     if (initPTS === undefined) {
       let startDTS = MP4Demuxer.getStartDTS(initData, data);
       this.initPTS = initPTS = startDTS - timeOffset;

@@ -10,14 +10,14 @@ import Event from '../events';
 import { getSelfScope } from '../utils/get-self-scope';
 
 export function getAudioConfig (observer, data, offset, audioCodec) {
-  let adtsObjectType, // :int
-    adtsSampleingIndex, // :int
-    adtsExtensionSampleingIndex, // :int
-    adtsChanelConfig, // :int
-    config,
-    userAgent = navigator.userAgent.toLowerCase(),
-    manifestCodec = audioCodec,
-    adtsSampleingRates = [
+  let adtsObjectType; // :int
+    let adtsSampleingIndex; // :int
+    let adtsExtensionSampleingIndex; // :int
+    let adtsChanelConfig; // :int
+    let config;
+    let userAgent = navigator.userAgent.toLowerCase();
+    let manifestCodec = audioCodec;
+    let adtsSampleingRates = [
       96000, 88200,
       64000, 48000,
       44100, 32000,
@@ -198,7 +198,7 @@ export function getFrameDuration (samplerate) {
 }
 
 export function parseFrameHeader (data, offset, pts, frameIndex, frameDuration) {
-  let headerLength, frameLength, stamp;
+  let headerLength; let frameLength; let stamp;
   let length = data.length;
 
   // The protection skip bit tells us if we have 2 bytes of CRC data at the end of the ADTS header

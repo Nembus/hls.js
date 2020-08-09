@@ -70,10 +70,10 @@ class AttrList {
   }
 
   static parseAttrList (input) {
-    let match, attrs = {};
+    let match; let attrs = {};
     ATTR_LIST_REGEX.lastIndex = 0;
     while ((match = ATTR_LIST_REGEX.exec(input)) !== null) {
-      let value = match[2], quote = '"';
+      let value = match[2]; let quote = '"';
 
       if (value.indexOf(quote) === 0 &&
           value.lastIndexOf(quote) === (value.length - 1)) {

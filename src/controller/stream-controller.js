@@ -55,7 +55,7 @@ class StreamController extends BaseStreamController {
 
   startLoad (startPosition) {
     if (this.levels) {
-      let lastCurrentTime = this.lastCurrentTime, hls = this.hls;
+      let lastCurrentTime = this.lastCurrentTime; let hls = this.hls;
       this.stopLoad();
       this.setInterval(TICK_INTERVAL);
       this.level = -1;
@@ -142,9 +142,9 @@ class StreamController extends BaseStreamController {
   // NOTE: Maybe we could rather schedule a check for buffer length after half of the currently
   //       played segment, or on pause/play/seek instead of naively checking every 100ms?
   _doTickIdle () {
-    const hls = this.hls,
-      config = hls.config,
-      media = this.media;
+    const hls = this.hls;
+      const config = hls.config;
+      const media = this.media;
 
     // if start level not parsed yet OR
     // if video not attached AND start fragment already requested OR start frag prefetch disable
@@ -170,15 +170,15 @@ class StreamController extends BaseStreamController {
     }
 
     // determine next load level
-    let level = hls.nextLoadLevel,
-      levelInfo = this.levels[level];
+    let level = hls.nextLoadLevel;
+      let levelInfo = this.levels[level];
 
     if (!levelInfo) {
       return;
     }
 
-    let levelBitrate = levelInfo.bitrate,
-      maxBufLen;
+    let levelBitrate = levelInfo.bitrate;
+      let maxBufLen;
 
     // compute max Buffer Length that we could get from this load level, based on level bitrate.
     if (levelBitrate) {
@@ -230,9 +230,9 @@ class StreamController extends BaseStreamController {
   }
 
   _fetchPayloadOrEos (pos, bufferInfo, levelDetails) {
-    const fragPrevious = this.fragPrevious,
-      fragments = levelDetails.fragments,
-      fragLen = fragments.length;
+    const fragPrevious = this.fragPrevious;
+      const fragments = levelDetails.fragments;
+      const fragLen = fragments.length;
 
     // empty playlist
     if (fragLen === 0) {
@@ -240,10 +240,10 @@ class StreamController extends BaseStreamController {
     }
 
     // find fragment index, contiguous with end of buffer position
-    let start = fragments[0].start,
-      end = fragments[fragLen - 1].start + fragments[fragLen - 1].duration,
-      bufferEnd = bufferInfo.end,
-      frag;
+    let start = fragments[0].start;
+      let end = fragments[fragLen - 1].start + fragments[fragLen - 1].duration;
+      let bufferEnd = bufferInfo.end;
+      let frag;
 
     if (levelDetails.initSegment && !levelDetails.initSegment.data) {
       frag = levelDetails.initSegment;
@@ -282,7 +282,7 @@ class StreamController extends BaseStreamController {
   }
 
   _ensureFragmentAtLivePoint (levelDetails, bufferEnd, start, end, fragPrevious, fragments) {
-    const config = this.hls.config, media = this.media;
+    const config = this.hls.config; const media = this.media;
 
     let frag;
 
@@ -523,7 +523,7 @@ class StreamController extends BaseStreamController {
   }
 
   _checkFragmentChanged () {
-    let fragPlayingCurrent, currentTime, video = this.media;
+    let fragPlayingCurrent; let currentTime; let video = this.media;
     if (video && video.readyState && video.seeking === false) {
       currentTime = video.currentTime;
       /* if video element is in seeked state, currentTime can only increase.
@@ -571,7 +571,7 @@ class StreamController extends BaseStreamController {
     logger.log('immediateLevelSwitch');
     if (!this.immediateSwitch) {
       this.immediateSwitch = true;
-      let media = this.media, previouslyPaused;
+      let media = this.media; let previouslyPaused;
       if (media) {
         previouslyPaused = media.paused;
         if (!previouslyPaused) {
@@ -631,7 +631,7 @@ class StreamController extends BaseStreamController {
       }
       if (!media.paused) {
         // add a safety delay of 1s
-        let nextLevelId = this.hls.nextLoadLevel, nextLevel = this.levels[nextLevelId], fragLastKbps = this.fragLastKbps;
+        let nextLevelId = this.hls.nextLoadLevel; let nextLevel = this.levels[nextLevelId]; let fragLastKbps = this.fragLastKbps;
         if (fragLastKbps && this.fragCurrent) {
           fetchdelay = this.fragCurrent.duration * nextLevel.bitrate / (1000 * fragLastKbps) + 1;
         } else {
@@ -745,7 +745,7 @@ class StreamController extends BaseStreamController {
   }
 
   onManifestParsed (data) {
-    let aac = false, heaac = false, codec;
+    let aac = false; let heaac = false; let codec;
     data.levels.forEach(level => {
       // detect if we have different kind of audio codecs used amongst playlists
       codec = level.audioCodec;
@@ -926,7 +926,7 @@ class StreamController extends BaseStreamController {
         fragNew.sn === fragCurrent.sn &&
         fragNew.level === fragCurrent.level &&
         this.state === State.PARSING) {
-      let tracks = data.tracks, trackName, track;
+      let tracks = data.tracks; let trackName; let track;
 
       this.audioOnly = tracks.audio && !tracks.video;
 
@@ -938,8 +938,8 @@ class StreamController extends BaseStreamController {
       // include levelCodec in audio and video tracks
       track = tracks.audio;
       if (track) {
-        let audioCodec = this.levels[this.level].audioCodec,
-          ua = navigator.userAgent.toLowerCase();
+        let audioCodec = this.levels[this.level].audioCodec;
+          let ua = navigator.userAgent.toLowerCase();
         if (audioCodec && this.audioCodecSwap) {
           logger.log('swapping playlist audio codec');
           if (audioCodec.indexOf('mp4a.40.5') !== -1) {
@@ -1000,8 +1000,8 @@ class StreamController extends BaseStreamController {
         fragNew.level === fragCurrent.level &&
         !(data.type === 'audio' && this.altAudio) && // filter out main audio if audio track is loaded through audio stream controller
         this.state === State.PARSING) {
-      let level = this.levels[this.level],
-        frag = fragCurrent;
+      let level = this.levels[this.level];
+        let frag = fragCurrent;
       if (!Number.isFinite(data.endPTS)) {
         data.endPTS = data.startPTS + fragCurrent.duration;
         data.endDTS = data.startDTS + fragCurrent.duration;
@@ -1051,8 +1051,8 @@ class StreamController extends BaseStreamController {
         }
       }
 
-      let drift = LevelHelper.updateFragPTSDTS(level.details, frag, data.startPTS, data.endPTS, data.startDTS, data.endDTS),
-        hls = this.hls;
+      let drift = LevelHelper.updateFragPTSDTS(level.details, frag, data.startPTS, data.endPTS, data.startDTS, data.endDTS);
+        let hls = this.hls;
       hls.trigger(Event.LEVEL_PTS_UPDATED, { details: level.details, level: this.level, drift: drift, type: data.type, start: data.startPTS, end: data.endPTS });
       // has remuxer dropped video frames located before first keyframe ?
       [data.data1, data.data2].forEach(buffer => {
@@ -1128,8 +1128,8 @@ class StreamController extends BaseStreamController {
   }
 
   onAudioTrackSwitched (data) {
-    let trackId = data.id,
-      altAudio = !!this.hls.audioTracks[trackId].url;
+    let trackId = data.id;
+      let altAudio = !!this.hls.audioTracks[trackId].url;
     if (altAudio) {
       let videoBuffer = this.videoBuffer;
       // if we switched on alternate audio, ensure that main fragment scheduling is synced with video sourcebuffer buffered
@@ -1143,7 +1143,7 @@ class StreamController extends BaseStreamController {
   }
 
   onBufferCreated (data) {
-    let tracks = data.tracks, mediaTrack, name, alternate = false;
+    let tracks = data.tracks; let mediaTrack; let name; let alternate = false;
     for (let type in tracks) {
       let track = tracks[type];
       if (track.id === 'main') {

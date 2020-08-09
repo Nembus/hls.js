@@ -650,7 +650,7 @@ lo007ts`;
     expect(result.fragments).to.have.lengthOf(8);
     expect(result.totalduration).to.equal(80);
 
-    let fragdecryptdata, decryptdata = result.fragments[0].decryptdata, sn = 0;
+    let fragdecryptdata; let decryptdata = result.fragments[0].decryptdata; let sn = 0;
 
     result.fragments.forEach(function (fragment, idx) {
       sn = idx + 1;

@@ -124,15 +124,15 @@ class MP4Remuxer {
   }
 
   generateIS (audioTrack, videoTrack, timeOffset) {
-    let observer = this.observer,
-      audioSamples = audioTrack.samples,
-      videoSamples = videoTrack.samples,
-      typeSupported = this.typeSupported,
-      container = 'audio/mp4',
-      tracks = {},
-      data = { tracks },
-      computePTSDTS = (this._initPTS === undefined),
-      initPTS, initDTS;
+    let observer = this.observer;
+      let audioSamples = audioTrack.samples;
+      let videoSamples = videoTrack.samples;
+      let typeSupported = this.typeSupported;
+      let container = 'audio/mp4';
+      let tracks = {};
+      let data = { tracks };
+      let computePTSDTS = (this._initPTS === undefined);
+      let initPTS; let initDTS;
 
     if (computePTSDTS) {
       initPTS = initDTS = Infinity;

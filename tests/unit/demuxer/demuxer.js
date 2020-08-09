@@ -90,13 +90,13 @@ describe('Demuxer tests', function () {
       level: 1,
       startPTS: 1000
     };
-    let data = new ArrayBuffer(8),
-      initSegment = {},
-      audioCodec = {},
-      videoCodec = {},
-      duration = {},
-      accurateTimeOffset = {},
-      defaultInitPTS = {};
+    let data = new ArrayBuffer(8);
+      let initSegment = {};
+      let audioCodec = {};
+      let videoCodec = {};
+      let duration = {};
+      let accurateTimeOffset = {};
+      let defaultInitPTS = {};
 
     let stub = sinon.stub(demux.w, 'postMessage').callsFake(function (obj1, obj2) {
       expect(obj1.cmd).to.equal('demux', 'cmd');
@@ -142,13 +142,13 @@ describe('Demuxer tests', function () {
       level: 2,
       start: 1000
     };
-    let data = {},
-      initSegment = {},
-      audioCodec = {},
-      videoCodec = {},
-      duration = {},
-      accurateTimeOffset = {},
-      defaultInitPTS = {};
+    let data = {};
+      let initSegment = {};
+      let audioCodec = {};
+      let videoCodec = {};
+      let duration = {};
+      let accurateTimeOffset = {};
+      let defaultInitPTS = {};
 
     let stub = sinon.stub(demux.demuxer, 'push').callsFake(function (obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10, obj11, obj12) {
       expect(obj1).to.equal(data);

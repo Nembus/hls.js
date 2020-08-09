@@ -4,7 +4,7 @@
 
 const Hex = {
   hexDump: function (array) {
-    let i, str = '';
+    let i; let str = '';
     for (i = 0; i < array.length; i++) {
       let h = array[i].toString(16);
       if (h.length < 2) {

@@ -117,7 +117,7 @@ export class FragmentTracker extends EventHandler {
 
   getBufferedTimes (startPTS, endPTS, timeRange) {
     let fragmentTimes = [];
-    let startTime, endTime;
+    let startTime; let endTime;
     let fragmentPartial = false;
     for (let i = 0; i < timeRange.length; i++) {
       startTime = timeRange.start(i) - this.bufferPadding;
@@ -160,7 +160,7 @@ export class FragmentTracker extends EventHandler {
    * @returns {Object} fragment Returns a partial fragment at a time or null if there is no partial fragment
    */
   getPartialFragment (time) {
-    let timePadding, startTime, endTime;
+    let timePadding; let startTime; let endTime;
     let bestFragment = null;
     let bestOverlap = 0;
     Object.keys(this.fragments).forEach(key => {
@@ -210,7 +210,7 @@ export class FragmentTracker extends EventHandler {
   }
 
   isTimeBuffered (startPTS, endPTS, timeRange) {
-    let startTime, endTime;
+    let startTime; let endTime;
     for (let i = 0; i < timeRange.length; i++) {
       startTime = timeRange.start(i) - this.bufferPadding;
       endTime = timeRange.end(i) + this.bufferPadding;

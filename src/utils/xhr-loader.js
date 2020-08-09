@@ -39,7 +39,7 @@ class XhrLoader {
   }
 
   loadInternal () {
-    let xhr, context = this.context;
+    let xhr; let context = this.context;
     xhr = this.loader = new window.XMLHttpRequest();
 
     let stats = this.stats;
@@ -81,11 +81,11 @@ class XhrLoader {
   }
 
   readystatechange (event) {
-    let xhr = event.currentTarget,
-      readyState = xhr.readyState,
-      stats = this.stats,
-      context = this.context,
-      config = this.config;
+    let xhr = event.currentTarget;
+      let readyState = xhr.readyState;
+      let stats = this.stats;
+      let context = this.context;
+      let config = this.config;
 
     // don't proceed if xhr has been aborted
     if (stats.aborted) {
@@ -105,7 +105,7 @@ class XhrLoader {
         // http status between 200 to 299 are all successful
         if (status >= 200 && status < 300) {
           stats.tload = Math.max(stats.tfirst, window.performance.now());
-          let data, len;
+          let data; let len;
           if (context.responseType === 'arraybuffer') {
             data = xhr.response;
             len = data.byteLength;
@@ -146,8 +146,8 @@ class XhrLoader {
   }
 
   loadprogress (event) {
-    let xhr = event.currentTarget,
-      stats = this.stats;
+    let xhr = event.currentTarget;
+      let stats = this.stats;
 
     stats.loaded = event.loaded;
     if (event.lengthComputable) {

@@ -2,7 +2,7 @@ import Events from '../../src/events';
 
 function getAllCapsSnakeCaseToCamelCase (eventType) {
   let eventValue = '';
-  let previousWasUscore, nextChar;
+  let previousWasUscore; let nextChar;
 
   for (let i = 0; i < eventType.length; i++) {
     nextChar = eventType.charAt(i);

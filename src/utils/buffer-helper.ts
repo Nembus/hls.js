@@ -131,8 +131,8 @@ export class BufferHelper {
     let bufferStart: number = pos;
     let bufferEnd: number = pos;
     for (let i = 0; i < buffered2.length; i++) {
-      let start = buffered2[i].start,
-        end = buffered2[i].end;
+      let start = buffered2[i].start;
+        let end = buffered2[i].end;
       // logger.log('buf start/end:' + buffered.start(i) + '/' + buffered.end(i));
       if ((pos + maxHoleDuration) >= start && pos < end) {
         // play position is inside this buffer TimeRange, retrieve end of buffer position and buffer length
